@@ -1,6 +1,7 @@
 # Projektantrag
   
 ## Beschreibung des Projekts
+
 Das Projekt soll eine Anwendung sein, mit der es möglich ist seine Verkäufe und Käufe im Autionshaus
 des MMORPGs World of Warcraft von Blizzard Activision zu festzuhalten. Hierfür soll eine REST-
 Schnittstelle implementiert werden, welche Http-Requests empfängt und auswertet. Nach der angegebenen
@@ -12,6 +13,7 @@ entsprechend in einer PostgreSQL Datenbank gespeichert werden, die in einem Dock
 wird.
 
 ## Genutzte Hilfsmittel
+
 Als Hilfsmittel für die Entwicklung der Rest-Schnittstelle soll das Framework "FastAPI" genutzt werden.
 
 ## Erste Lösungsidee
