@@ -1,10 +1,22 @@
 from fastapi import FastAPI
+from services.ItemService import ItemService
+from database.Model import Item
 
 app = FastAPI()
 
-@app.get("/")
-async def root():
-        return {"message": "Hello World"}
+
+@app.post("/items/new")
+async def createNewItem(item: Item):
+        ItemService.createNewItem(item)
+
+@app.get("/items/{itemId}")
+async def getItemWithId(itemId: str):
+        return {"message": itemId}
+
+
+@app.get("/items")
+async def getAllItems():
+        return ItemService.getAllItems()
 
 
 # https://fastapi.tiangolo.com/tutorial/path-params/
