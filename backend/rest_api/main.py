@@ -1,23 +1,34 @@
-from fastapi import FastAPI
-from services.ItemService import ItemService
-from database.Model import Item
+import os
+
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+
+from ItemService import ItemService
+import schemas, crud, models
 
 app = FastAPI()
+itemService = ItemService
 
+def get_db():
+    db = models.SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @app.post("/items/new")
-async def createNewItem(item: Item):
-        ItemService.createNewItem(item)
+def createNewItem(newItem: schemas.Item, db: Session = Depends(get_db)):
+    return crud.createItem(db, newItem)
+
 
 @app.get("/items/{itemId}")
-async def getItemWithId(itemId: str):
-        return {"message": itemId}
+def getItemWithId(itemId: str):
+    return {"message": itemId}
 
 
 @app.get("/items")
 async def getAllItems():
-        return ItemService.getAllItems()
-
+    return ItemService().getAllItems()
 
 # https://fastapi.tiangolo.com/tutorial/path-params/
 # https://packaging.python.org/en/latest/tutorials/packaging-projects/
