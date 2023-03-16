@@ -27,22 +27,13 @@ tab_api_sale_items = Table(
     Column("item_id", ForeignKey("tab_api_item.id"))
 )
 
-class Price(Base):
-    __tablename__ = "tab_api_price"
-    id = mapped_column("id", Integer, nullable=False, primary_key=True)
-    item = mapped_column("item_id", Integer)
-    gold = mapped_column("gold", Integer)
-    silver = mapped_column("silver", Integer)
-    copper = mapped_column("copper", Integer)
-    item_relation = relationship("Item", back_populates="price_value")
-
-
 class Item(Base):
     __tablename__ = "tab_api_item"
     id = mapped_column("id", Integer, nullable=False, primary_key=True)
     name = mapped_column("item_name", String)
-    value = mapped_column(ForeignKey("tab_api_price.id"))
-    price_value = relationship("Price", back_populates="item_relation")
+    gold = mapped_column("gold", Integer)
+    silver = mapped_column("silver", Integer)
+    copper = mapped_column("copper", Integer)
     item_sales = relationship("Sale", secondary="tab_api_sale_items", back_populates="items")
 
 

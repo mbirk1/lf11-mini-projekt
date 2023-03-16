@@ -6,12 +6,8 @@ def getAllItems(db: Session):
     return db.query(models.Item)
 
 
-def createItem(db: Session, item: schemas.Item):
-    priceToCreate = models.Price(gold=item.value.gold, silver=item.value.silver, copper=item.value.copper)
-    db.add(priceToCreate)
-    db.commit()
-    db.refresh(priceToCreate)
-    itemToCreate = models.Item(name=item.name, value=priceToCreate.id)
+def createItem(db: Session, item: schemas.ItemBase):
+    itemToCreate = models.Item(name=item.name, gold= item.gold, silver=item.silver, copper=item.copper)
     db.add(itemToCreate)
     db.commit()
     db.refresh(itemToCreate)

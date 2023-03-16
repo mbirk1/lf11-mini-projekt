@@ -17,7 +17,7 @@ def get_db():
         db.close()
 
 @app.post("/items/new")
-def createNewItem(newItem: schemas.Item, db: Session = Depends(get_db)):
+def createNewItem(newItem: schemas.ItemBase, db: Session = Depends(get_db)):
     return crud.createItem(db, newItem)
 
 
